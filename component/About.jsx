@@ -95,10 +95,35 @@ const AuthPage = () => {
                             </div>
                         ) : (
                             <div className="text-lg text-gray-300 space-y-2">
-                                <p><strong>Education:</strong></p>
-                                <p>B.Tech in Computer Science Engineering — AKTU </p>
-                                <p>Graduation Year: 3rd Year</p>
-                                <p>Relevant Courses: Data Structures, DBMS, Compiler Designing</p>
+                                <motion.div
+                                    initial={{ opacity: 0, y: -50, x: -50, z: -20 }}
+                                    animate={{ opacity: 1, y: 0, x: 0, z: 0 }}
+                                    transition={{ duration: 1, delay: 0.5 }}>
+                                    <p className="text-2xl font-extrabold text-red-400"><strong>Education:</strong></p>
+                                </motion.div>
+                                <motion.div
+                                    initial={{ opacity: 0, y: -50, x: -50, z: -20 }}
+                                    animate={{ opacity: 1, y: 0, x: 0, z: 0 }}
+                                    transition={{ duration: 1, delay: 1 }}>
+                                    <h1 className="text-2xl text-blue-400">Secondary Eduction&nbsp;(2019-2020) </h1>
+                                    <span>Grain Chamber Public School - CBSE</span>
+                                </motion.div>
+                                <motion.div
+                                    initial={{ opacity: 0, y: -50, x: -50, z: -20 }}
+                                    animate={{ opacity: 1, y: 0, x: 0, z: 0 }}
+                                    transition={{ duration: 1, delay: 2 }}>
+                                    <p className="text-2xl text-blue-400">Higher Secondary Education&nbsp;(2021-2022)</p>
+                                    <span>Grain Chamber Public School - CBSE</span>
+                                </motion.div>
+                                <motion.div
+                                    initial={{ opacity: 0, y: -50, x: -50, z: -20 }}
+                                    animate={{ opacity: 1, y: 0, x: 0, z: 0 }}
+                                    transition={{ duration: 1, delay: 3 }}>
+                                    <p className="text-2xl text-blue-400">B.Tech in Computer Science Engineering — AKTU </p>
+                                    <p className="text-green-300">Pursuing</p>
+                                    <p>Graduation Year : 2026</p>
+                                    <p>Relevant Courses: Data Structures, DBMS, Compiler Designing</p>
+                                </motion.div>
                             </div>
                         )}
                     </div>

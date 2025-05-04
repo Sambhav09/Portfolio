@@ -13,28 +13,31 @@ const page = () => {
     <>
       <Cursor />
       <Navbar />
-      <div className='container'>
+      <div className='container bg-black'>
+
         <section id='home' className='min-h-[calc(100vh-4rem)]'>
-          <Home />
+          <LazyMount id='home'>
+            <Home />
+          </LazyMount>
         </section>
-        <section id='about'>
-          <LazyMount>
+        <section id='about' >
+          <LazyMount id='about'>
             <About />
           </LazyMount>
         </section>
-        <section id='skills'>
-          <LazyMount>
+        <section id='skills' >
+          <LazyMount id='skills'>
             <Skills />
           </LazyMount>
         </section>
-        <section id='contact'>
-          <LazyMount>
-            <Information />
+        <section id='projects' >
+          <LazyMount id='projects'>
+            <Projects />
           </LazyMount>
         </section>
-        <section id='projects'>
-          <LazyMount>
-            <Projects />
+        <section id='contact' >
+          <LazyMount id='contact'>
+            <Information />
           </LazyMount>
         </section>
       </div>

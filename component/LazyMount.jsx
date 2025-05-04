@@ -1,31 +1,49 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 
-const LazyMount = ({ children, threshold = 0.2 }) => {
+const LazyMount = ({ children, threshold = 0.4, id }) => {
     const containerRef = useRef(null);
     const [shouldRender, setShouldRender] = useState(false);
 
     useEffect(() => {
+        const hash = window.location.hash;
+
+        // If this section is being navigated to, render it
+        if (hash === `#${id}`) {
+            setShouldRender(true);
+        }
+
+        const onHashChange = () => {
+            if (window.location.hash === `#${id}`) {
+                setShouldRender(true);
+                containerRef.current?.scrollIntoView({ behavior: "smooth" }); // optional: smooth scroll
+            }
+        };
+
+        window.addEventListener("hashchange", onHashChange);
+
         const observer = new IntersectionObserver(
             ([entry]) => {
-                console.log("IntersectionObserver Entry: ", entry);  // Debugging line
                 if (entry.isIntersecting) {
                     setShouldRender(true);
-                    observer.disconnect(); // Mount only once
+                    observer.disconnect();
                 }
             },
-            { threshold }
+            { threshold, rootMargin: "0px 0px -20% 0px" }
         );
 
         if (containerRef.current) {
             observer.observe(containerRef.current);
         }
 
-        return () => observer.disconnect();
-    }, [threshold]);
+        return () => {
+            window.removeEventListener("hashchange", onHashChange);
+            observer.disconnect();
+        };
+    }, [threshold, id]);
 
     return (
-        <div ref={containerRef} style={{ minHeight: "100px" }}>
+        <div id={id} ref={containerRef} style={{ minHeight: "100vh" }}>
             {shouldRender ? children : null}
         </div>
     );
