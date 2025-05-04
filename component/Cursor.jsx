@@ -1,7 +1,7 @@
 "use client"
 import React from 'react'
 import { useEffect, useState } from 'react'
-import { motion, useMotionValue, useSpring, useAnimation } from 'framer-motion'
+import { motion, useMotionValue, useSpring, useAnimation, px } from 'framer-motion'
 
 const Cursor = () => {
 
@@ -16,8 +16,10 @@ const Cursor = () => {
 
     useEffect(() => {
         const updateCursor = (e) => {
-            x.set(e.clientX - 24)
-            y.set(e.clientY - 24)
+            const offsetX = 40;
+            const offsetY = 40;
+            x.set(e.clientX - offsetX)
+            y.set(e.clientY - offsetY)
         }
         const handleMouseEnter = (e) => {
             const target = e.target

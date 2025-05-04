@@ -46,7 +46,7 @@ const Home = () => {
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ duration: 1, delay: 1.2 }}
-                            className='p-3 rounded-full bg-gray-500 border-4 border-gray-700 text-white'>
+                            className='p-2 sm:p-3 rounded-3xl sm:rounded-full bg-gray-500 border-4 border-gray-700 text-white text-sm sm:text-base'>
                             My work
                         </motion.button>
                     </a>
@@ -55,15 +55,16 @@ const Home = () => {
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ duration: 1, delay: 1.2 }}
-                            className='p-3 rounded-full bg-gray-500 border-4 border-gray-700 text-white'>
+                            className='p-2 sm:p-3 rounded-3xl sm:rounded-full bg-gray-500 border-4 border-gray-700 text-white text-sm sm:text-base'>
                             Get in touch
                         </motion.button>
                     </a>
                 </div>
+
             </div>
 
             {/* Right Column (Image) */}
-            <div className='w-full md:w-1/2 h-screen flex justify-center items-center'>
+            <div className='sm:block w-full md:w-1/2 h-screen flex justify-center items-center'>
                 <motion.div
                     initial={{ opacity: 0, scale: 0, y: 50 }}
                     animate={{ opacity: 1, scale: 1, y: 0 }}

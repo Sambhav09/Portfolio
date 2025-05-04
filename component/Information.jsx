@@ -1,9 +1,37 @@
 "use client"
-import React from 'react'
+import React, { useState } from 'react'
 import { Mail, Phone, } from 'lucide-react'
 import { motion } from 'framer-motion'
 
 const Information = () => {
+    const [name, setname] = useState("")
+    const [email, setemail] = useState("")
+    const [subject, setsubject] = useState("")
+    const [message, setmessage] = useState("")
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        const data = {
+            name: name,
+            email: email,
+            subject: subject,
+            message: message
+        }
+        const response = await fetch('/api/mail', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+        console.log(data)
+        setname("")
+        setemail("")
+        setsubject("")
+        setmessage("")
+    }
+
+
     return (
         <div className='min-h-screen sm:h-screen w-full bg-black text-white px-4 py-8 overflow-x-hidden overflow-y-hidden'>
             <motion.h1
@@ -35,24 +63,29 @@ const Information = () => {
                     </div>
                 </motion.div>
 
-                {/* Form section */}
                 <motion.div
                     initial={{ opacity: 0, x: 150 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 2.5, delay: 1 }}
                     className='w-full md:w-1/2 flex justify-center items-center'>
-                    <form autoComplete='off' action="submit" className='w-full max-w-md'>
+                    <form autoComplete='off' action="submit" onSubmit={handleSubmit} className='w-full max-w-md'>
                         <div className='flex flex-col gap-4'>
                             <div className='gap-4 flex flex-col md:flex-row'>
                                 <input
                                     autoComplete='off'
                                     type="text"
                                     placeholder='Name'
+                                    required
+                                    onChange={(e) => setname(e.target.value)}
+                                    value={name}
                                     className='p-2 rounded-lg text-white border-2 border-gray-500 bg-transparent w-full'
                                 />
                                 <input
                                     autoComplete='off'
                                     type="email"
+                                    required
+                                    onChange={(e) => setemail(e.target.value)}
+                                    value={email}
                                     placeholder='Email'
                                     className='p-2 rounded-lg text-white border-2 border-gray-500 bg-transparent w-full'
                                 />
@@ -60,12 +93,18 @@ const Information = () => {
                             <input
                                 autoComplete='off'
                                 type="text"
+                                required
+                                onChange={(e) => setsubject(e.target.value)}
+                                value={subject}
                                 placeholder='Subject'
                                 className='p-3 rounded-lg border-2 text-white border-gray-500 bg-transparent'
                             />
                             <textarea
                                 autoComplete='off'
                                 placeholder='Message'
+                                required
+                                onChange={(e) => setmessage(e.target.value)}
+                                value={message}
                                 className='p-3 rounded-lg border-2 text-white border-gray-500 bg-transparent'
                                 rows="5"
                             ></textarea>
