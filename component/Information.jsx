@@ -4,6 +4,7 @@ import { Mail, Phone, } from 'lucide-react'
 import { motion } from 'framer-motion'
 
 const Information = () => {
+    const [loading, setloading] = useState(false)
     const [name, setname] = useState("")
     const [email, setemail] = useState("")
     const [subject, setsubject] = useState("")
@@ -11,24 +12,33 @@ const Information = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const data = {
-            name: name,
-            email: email,
-            subject: subject,
-            message: message
+        try {
+            setloading(true)
+            const data = {
+                name: name,
+                email: email,
+                subject: subject,
+                message: message
+            }
+            const response = await fetch('/api/mail', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+            console.log(data)
+
+        } catch (error) {
+            console.log(error)
+        } finally {
+            setloading(false)
+            setname("")
+            setemail("")
+            setsubject("")
+            setmessage("")
         }
-        const response = await fetch('/api/mail', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        });
-        console.log(data)
-        setname("")
-        setemail("")
-        setsubject("")
-        setmessage("")
+
     }
 
 
@@ -112,7 +122,7 @@ const Information = () => {
                                 type="submit"
                                 className='p-3 rounded-full bg-blue-400 text-white hover:bg-blue-500 transition'
                             >
-                                Send
+                                {loading ? "Sending..." : "Send"}
                             </button>
                         </div>
                     </form>
