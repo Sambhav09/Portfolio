@@ -64,15 +64,33 @@ const Home = () => {
             </div>
 
             {/* Right Column (Image) */}
-            <div className='sm:block w-full md:w-1/2 h-screen flex justify-center items-center'>
+            <div className='sm:block w-full md:pl-40 md:w-1/2 h-screen flex justify-center items-center bg-black'>
                 <motion.div
                     initial={{ opacity: 0, scale: 0, y: 50 }}
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     transition={{ duration: 2, delay: 1 }}
-                    className='w-full max-w-[400px] h-full flex justify-center items-center'>
-                    <img src="/paru.jpg" alt="random" className='cover' />
+                    className='w-full max-w-[400px] h-full flex justify-center items-center'
+                >
+                    <div className="relative h-80 w-80 flex items-center justify-center">
+                        {/* Spinning colorful border */}
+                        <div className="absolute inset-0 z-0 rounded-full blur-md opacity-80 animate-spin-slow pointer-events-none"
+                            style={{
+                                background: "conic-gradient(from 0deg, #ff00cc, #3333ff, #00ffcc, #ffcc00, #ff00cc)"
+                            }}>
+                        </div>
+                        {/* Profile image with black background */}
+                        <div className="relative h-72 w-72 rounded-full overflow-hidden border-4 border-gray-700 shadow-lg z-10 bg-black flex items-center justify-center">
+                            <img
+                                src="/profile.jpg"
+                                alt="profile"
+                                className="w-full pt-24 object-cover scale-[1.2]"
+                            />
+                        </div>
+                    </div>
                 </motion.div>
             </div>
+
+
         </div>
     )
 }

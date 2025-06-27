@@ -46,13 +46,13 @@ const Skills = () => {
             />
             <div className="flex flex-wrap justify-center pt-12">
                 <HoverFunction img="/html.png" name="HTML" />
-                <HoverFunction img="/csss.png" name="CSS" />
-                <HoverFunction img="/js.jpeg" name="Javascript" />
+                <HoverFunction img="/css.png" name="CSS" />
+                <HoverFunction img="/js.png" name="Javascript" />
                 <HoverFunction img="/react.png" name="React" />
                 <HoverFunction img="/tailwind.png" name="Tailwind" />
                 <HoverFunction img="/node2.png" name="NodeJs" />
                 <HoverFunction img="/next.png" name="Next JS" />
-                <HoverFunction img="/python.jpeg" name="Python" />
+                <HoverFunction img="/python.png" name="Python" />
                 <HoverFunction img="/c.png" name="C" />
                 <HoverFunction img="/mongodb.png" name="Mongo DB" />
             </div>
