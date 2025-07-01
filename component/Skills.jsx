@@ -20,15 +20,15 @@ const HoverFunction = ({ img, name }) => {
         <motion.div
             ref={ref}
             onMouseMove={handleMouseMove}
-            className="relative w-70 h-30 rounded-xl overflow-hidden border-2 border-green-400 shadow-md m-4"
+            className="relative w-full sm:w-60 h-20 sm:h-24 rounded-xl overflow-hidden border-2 border-green-400 shadow-md m-2 sm:m-4"
             animate={{
                 background: `radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(47, 90, 226, 1),  transparent 30%)`,
             }}
             transition={{ type: 'tween', duration: 0.2 }}
         >
-            <div className="relative z-10 flex items-center justify-around h-full text-lg font-semibold ">
-                <img src={img} alt={name} className="w-16 h-16 object-contain mb-2" />
-                <h1 className='text-gray-500'>{name}</h1>
+            <div className="relative z-10 flex items-center justify-around h-full text-sm sm:text-lg font-semibold px-2">
+                <img src={img} alt={name} className="w-10 h-10 sm:w-12 sm:h-12 lg:w-16 lg:h-16 object-contain" />
+                <h1 className='text-gray-500 text-xs sm:text-sm lg:text-base'>{name}</h1>
             </div>
         </motion.div>
     );
@@ -36,15 +36,15 @@ const HoverFunction = ({ img, name }) => {
 
 const Skills = () => {
     return (
-        <div className='min-h-screen flex flex-col items-center bg-black'>
-            <p className='text-4xl font-extrabold text-gray-400 mt-12'>Skills</p>
+        <div className='min-h-screen flex flex-col items-center bg-black px-4 sm:px-6 lg:px-8 overflow-x-hidden'>
+            <p className='text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-400 mt-8 sm:mt-12 mb-4 sm:mb-6'>Skills</p>
             <motion.div
                 initial={{ width: 0 }}
-                animate={{ width: '100px' }}
+                animate={{ width: '80px' }}
                 transition={{ duration: 0.8, ease: 'easeInOut', delay: 0.3, }}
                 className='h-1 bg-gray-400 mt-2 rounded'
             />
-            <div className="flex flex-wrap justify-center pt-12">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 pt-8 sm:pt-12 w-full max-w-6xl">
                 <HoverFunction img="/html.png" name="HTML" />
                 <HoverFunction img="/css.png" name="CSS" />
                 <HoverFunction img="/js.png" name="Javascript" />

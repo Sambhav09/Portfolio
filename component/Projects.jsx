@@ -25,8 +25,8 @@ const Projects = () => {
     }, [])
 
     return (
-        <div className='min-h-screen bg-black text-white px-4 sm:px-6 py-10'>
-            <p className='text-4xl font-extrabold text-gray-400 mt-12 text-center'>
+        <div className='min-h-screen bg-black text-white px-4 sm:px-6 lg:px-8 py-8 sm:py-10 lg:py-12 overflow-x-hidden'>
+            <p className='text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-400 mt-8 sm:mt-12 mb-8 sm:mb-16 lg:mb-20 text-center'>
                 {ch.split("").map((letter, index) => (
                     <motion.span
                         key={index}
@@ -39,69 +39,67 @@ const Projects = () => {
                 ))}
             </p>
 
-
-            <div className='flex flex-col md:flex-row gap-12 mt-20 justify-around items-center'>
+            <div className='flex flex-col lg:flex-row gap-8 sm:gap-12 lg:gap-16 mt-12 sm:mt-16 lg:mt-20 justify-center items-center max-w-7xl mx-auto'>
                 <motion.div
                     initial={{ opacity: 0, y: 150 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 2, delay: 1 }}
-                    className='bg-gray-800 rounded-2xl overflow-hidden w-full max-w-sm shadow-2xl'>
+                    className='bg-gray-800 rounded-2xl overflow-hidden w-full max-w-sm sm:max-w-md lg:max-w-lg shadow-2xl'>
                     <motion.img
                         initial={{ opacity: 0, scale: 0, y: 50 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         transition={{ duration: 2, delay: 2.5 }}
                         src={images1[index1]}
                         alt="Project 1"
-                        className='w-full h-[220px] object-fit'
+                        className='w-full h-48 sm:h-56 lg:h-64 object-cover'
                     />
-                    <div className='p-6'>
-                        <h2 className='text-xl sm:text-2xl font-semibold mb-4'>Ai Powered Interviewer</h2>
-                        <p className='text-sm sm:text-base text-gray-300'>
+                    <div className='p-4 sm:p-6 lg:p-8'>
+                        <h2 className='text-lg sm:text-xl lg:text-2xl font-semibold mb-3 sm:mb-4'>Ai Powered Interviewer</h2>
+                        <p className='text-xs sm:text-sm lg:text-base text-gray-300 leading-relaxed'>
                             Our website offers a realistic interview experience powered by AI, simulating real-time conversations just like a human interviewer. After each interview, the AI analyzes your performance and provides detailed feedback to help you improve your skills and boost your confidence.
                         </p>
                     </div>
-                    <div className=' flex justify-around items-center  gap-4 p-4 rounded-b-2xl'>
-                        <a href="https://github.com/Sambhav09/Interviewer" target='_blank'>
-                            <button className="flex items-center gap-2 text-white px-4 py-2 rounded bg-black hover:bg-gray-800 transition">
-                                <Github /> Github
+                    <div className='flex flex-col sm:flex-row justify-around items-center gap-3 sm:gap-4 p-4 sm:p-6 rounded-b-2xl'>
+                        <a href="https://github.com/Sambhav09/Interviewer" target='_blank' className='w-full sm:w-auto'>
+                            <button className="flex items-center justify-center gap-2 text-white px-4 py-2 sm:py-3 rounded bg-black hover:bg-gray-800 transition w-full sm:w-auto text-sm sm:text-base">
+                                <Github size={16} className="sm:w-5 sm:h-5" /> Github
                             </button>
                         </a>
-                        <a href="https://interviewer-nine.vercel.app/" target='_blank'>
-                            <button className="px-4 py-2 bg-black text-white rounded hover:bg-gray-800 transition">
+                        <a href="https://interviewer-nine.vercel.app/" target='_blank' className='w-full sm:w-auto'>
+                            <button className="px-4 py-2 sm:py-3 bg-black text-white rounded hover:bg-gray-800 transition w-full sm:w-auto text-sm sm:text-base">
                                 Try it here
                             </button>
                         </a>
                     </div>
-
                 </motion.div>
 
                 <motion.div
                     initial={{ opacity: 0, y: 150 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 2, delay: 1 }}
-                    className='bg-gray-800 rounded-2xl overflow-hidden w-full max-w-sm shadow-2xl'>
+                    className='bg-gray-800 rounded-2xl overflow-hidden w-full max-w-sm sm:max-w-md lg:max-w-lg shadow-2xl'>
                     <motion.img
                         initial={{ opacity: 0, scale: 0, y: 50 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         transition={{ duration: 2, delay: 2.5 }}
                         src={images2[index2]}
                         alt="Project 2"
-                        className='w-full h-[220px] object-fit  '
+                        className='w-full h-48 sm:h-56 lg:h-64 object-cover'
                     />
-                    <div className='p-6'>
-                        <h2 className='text-xl sm:text-2xl font-semibold mb-4'>Prompts</h2>
-                        <p className='text-sm sm:text-base text-gray-300'>
+                    <div className='p-4 sm:p-6 lg:p-8'>
+                        <h2 className='text-lg sm:text-xl lg:text-2xl font-semibold mb-3 sm:mb-4'>Prompts</h2>
+                        <p className='text-xs sm:text-sm lg:text-base text-gray-300 leading-relaxed'>
                             Create, update, and delete your own prompts with ease. Secure authentication is handled using NextAuth, ensuring a personalized and safe user experience.
                         </p>
                     </div>
-                    <div className=' flex justify-around items-center  gap-4 p-4 rounded-b-2xl'>
-                        <a href="https://github.com/Sambhav09/Prompt" target='_blank'>
-                            <button className="flex items-center gap-2 text-white px-4 py-2 rounded bg-black hover:bg-gray-800 transition">
-                                <Github /> Github
+                    <div className='flex flex-col sm:flex-row justify-around items-center gap-3 sm:gap-4 p-4 sm:p-6 rounded-b-2xl'>
+                        <a href="https://github.com/Sambhav09/Prompt" target='_blank' className='w-full sm:w-auto'>
+                            <button className="flex items-center justify-center gap-2 text-white px-4 py-2 sm:py-3 rounded bg-black hover:bg-gray-800 transition w-full sm:w-auto text-sm sm:text-base">
+                                <Github size={16} className="sm:w-5 sm:h-5" /> Github
                             </button>
                         </a>
-                        <a href="https://prompt-sand.vercel.app/" target='_blank'>
-                            <button className="px-4 py-2 bg-black text-white rounded hover:bg-gray-800 transition">
+                        <a href="https://prompt-sand.vercel.app/" target='_blank' className='w-full sm:w-auto'>
+                            <button className="px-4 py-2 sm:py-3 bg-black text-white rounded hover:bg-gray-800 transition w-full sm:w-auto text-sm sm:text-base">
                                 Try it here
                             </button>
                         </a>
