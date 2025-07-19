@@ -13,7 +13,7 @@ const page = () => {
     <>
       <Cursor />
       <Navbar />
-      <div className='w-full overflow-x-hidden bg-black'>
+      <div className='container bg-black'>
 
         <section id='home' className='min-h-[calc(100vh-4rem)]'>
           <LazyMount id='home'>
