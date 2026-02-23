@@ -1,66 +1,75 @@
 "use client"
-import React from 'react'
-import { useEffect, useState } from 'react'
-import { motion, useMotionValue, useSpring, useAnimation, px } from 'framer-motion'
+import React, { useEffect, useState } from 'react'
+import { motion, useMotionValue, useSpring } from 'framer-motion'
 
 const Cursor = () => {
+    const mouseX = useMotionValue(0)
+    const mouseY = useMotionValue(0)
 
-    const x = useMotionValue(0)
-    const y = useMotionValue(0)
+    const springConfig = { damping: 25, stiffness: 150 }
+    const cursorX = useSpring(mouseX, springConfig)
+    const cursorY = useSpring(mouseY, springConfig)
 
-    const controls = useAnimation()
-
-    const springX = useSpring(x, { stiffness: 50, damping: 30 })
-    const springY = useSpring(y, { stiffness: 50, damping: 30 })
-    const [isHovering, setisHovering] = useState(false)
+    const [isHovering, setIsHovering] = useState(false)
 
     useEffect(() => {
-        const updateCursor = (e) => {
-            const offsetX = 40;
-            const offsetY = 40;
-            x.set(e.clientX - offsetX)
-            y.set(e.clientY - offsetY)
+        const moveCursor = (e) => {
+            mouseX.set(e.clientX)
+            mouseY.set(e.clientY)
         }
-        const handleMouseEnter = (e) => {
-            const target = e.target
-            if (target.closest('a, button')) {
-                setisHovering(true)
+
+        const handleMouseOver = (e) => {
+            if (e.target.closest('a, button, input, textarea')) {
+                setIsHovering(true)
             }
         }
 
-        window.addEventListener('mousemove', updateCursor)
-        window.addEventListener('mouseover', handleMouseEnter)
-        window.addEventListener('mouseout', () => setisHovering(false))
+        const handleMouseOut = () => {
+            setIsHovering(false)
+        }
+
+        window.addEventListener('mousemove', moveCursor)
+        window.addEventListener('mouseover', handleMouseOver)
+        window.addEventListener('mouseout', handleMouseOut)
 
         return () => {
-            window.removeEventListener('mousemove', updateCursor)
-            window.removeEventListener('mouseover', handleMouseEnter)
+            window.removeEventListener('mousemove', moveCursor)
+            window.removeEventListener('mouseover', handleMouseOver)
+            window.removeEventListener('mouseout', handleMouseOut)
         }
-    }, [x, y])
-
-    useEffect(() => {
-        if (isHovering) {
-            controls.start({
-                scale: 1.5,
-            })
-        } else {
-            controls.start({
-                scale: 1,
-            })
-        }
-    }, [isHovering, controls])
-
+    }, [mouseX, mouseY])
 
     return (
-        <motion.div className='fixed h-9 w-9 rounded-full bg-gray-500'
-            style={{
-                translateX: springX,
-                translateY: springY,
-            }}
-            animate={controls}
-        >
-
-        </motion.div >
+        <>
+            {/* Main Cursor Dot */}
+            <motion.div
+                className="fixed top-0 left-0 w-2 h-2 bg-blue-500 rounded-full pointer-events-none z-[9999]"
+                style={{
+                    x: mouseX,
+                    y: mouseY,
+                    translateX: '-50%',
+                    translateY: '-50%',
+                }}
+            />
+            {/* Outer Ring */}
+            <motion.div
+                className="fixed top-0 left-0 w-10 h-10 border-2 border-blue-500/60 rounded-full pointer-events-none z-[9998]"
+                style={{
+                    x: cursorX,
+                    y: cursorY,
+                    translateX: '-50%',
+                    translateY: '-50%',
+                }}
+                animate={{
+                    scale: isHovering ? 1.8 : 1,
+                    backgroundColor: isHovering ? 'rgba(59, 130, 246, 0.2)' : 'rgba(59, 130, 246, 0)',
+                    borderColor: isHovering ? 'rgba(59, 130, 246, 0.9)' : 'rgba(59, 130, 246, 0.6)',
+                    boxShadow: isHovering
+                        ? '0 0 20px rgba(59, 130, 246, 0.4)'
+                        : '0 0 10px rgba(59, 130, 246, 0.2)',
+                }}
+            />
+        </>
     )
 }
 

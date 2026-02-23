@@ -1,6 +1,8 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 
+import { motion } from "framer-motion";
+
 const LazyMount = ({ children, threshold = 0.4, id }) => {
     const containerRef = useRef(null);
     const [shouldRender, setShouldRender] = useState(false);
@@ -44,7 +46,15 @@ const LazyMount = ({ children, threshold = 0.4, id }) => {
 
     return (
         <div id={id} ref={containerRef} style={{ minHeight: "100vh" }}>
-            {shouldRender ? children : null}
+            {shouldRender ? (
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 1 }}
+                >
+                    {children}
+                </motion.div>
+            ) : null}
         </div>
     );
 };

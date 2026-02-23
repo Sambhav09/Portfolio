@@ -7,55 +7,93 @@ import { Menu, X } from 'lucide-react';
 const Navbar = () => {
     const { scrollY } = useScroll();
 
-    const width = useTransform(scrollY, [0, 100], ['100%', '75%']);
-    const borderRadius = useTransform(scrollY, [0, 100], ['0px', '12px']);
-    const marginTop = useTransform(scrollY, [0, 100], ['0px', '32px']);
-    const opacity = useTransform(scrollY, [0, 100], [1, 0.8]);
+    const width = useTransform(scrollY, [0, 100], ['100%', '90%']);
+    const borderRadius = useTransform(scrollY, [0, 100], ['0px', '24px']);
+    const marginTop = useTransform(scrollY, [0, 100], ['0px', '20px']);
+    const backgroundColor = useTransform(
+        scrollY,
+        [0, 100],
+        ['rgba(3, 3, 3, 0)', 'rgba(3, 3, 3, 0.8)']
+    );
+    const border = useTransform(
+        scrollY,
+        [0, 100],
+        ['1px solid rgba(255, 255, 255, 0)', '1px solid rgba(255, 255, 255, 0.1)']
+    );
 
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleMenu = () => setIsOpen(!isOpen);
 
+    const navLinks = [
+        { name: 'Home', href: '#home' },
+        { name: 'About', href: '#about' },
+        { name: 'Skills', href: '#skills' },
+        { name: 'Projects', href: '#projects' },
+        { name: 'Contact', href: '#contact' },
+    ];
+
     return (
-        <motion.div
+        <motion.nav
             style={{
                 width,
                 borderRadius,
                 marginTop,
-                opacity,
+                backgroundColor,
+                border,
                 left: '50%',
-                transform: 'translateX(-50%)'
+                x: '-50%',
             }}
-            className='fixed top-0 bg-gray-800 h-16 z-50 flex justify-between items-center px-4 transition-all'
+            className='fixed top-0 z-50 flex justify-between items-center px-8 h-12 backdrop-blur-md transition-all'
         >
-            <div className="text-white text-xl font-bold">Portfolio</div>
+            <motion.div
+                whileHover={{ scale: 1.05 }}
+                className="text-white text-xl font-extrabold tracking-tighter"
+            >
+                SAMBHAV<span className="text-blue-500">.</span>
+            </motion.div>
 
-            <div className="hidden md:flex space-x-6">
-                <a href="#home" className="text-white hover:text-blue-400 transition">Home</a>
-                <a href="#about" className="text-white hover:text-blue-400 transition">About</a>
-                <a href="#skills" className="text-white hover:text-blue-400 transition">Skills</a>
-                <a href="#projects" className="text-white hover:text-blue-400 transition">Projects</a>
-                <a href="#contact" className="text-white hover:text-blue-400 transition">Contact</a>
+            <div className="hidden md:flex space-x-8">
+                {navLinks.map((link) => (
+                    <motion.a
+                        key={link.name}
+                        href={link.href}
+                        whileHover={{ y: -2 }}
+                        className="text-sm font-medium text-gray-300 hover:text-white transition-colors relative group"
+                    >
+                        {link.name}
+                        <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 transition-all group-hover:w-full"></span>
+                    </motion.a>
+                ))}
             </div>
 
             {/* Hamburger Menu */}
             <div className="md:hidden">
-                <button onClick={toggleMenu} className="text-white focus:outline-none">
-                    {isOpen ? <X size={28} /> : <Menu size={28} />}
+                <button onClick={toggleMenu} className="text-white focus:outline-none p-2">
+                    {isOpen ? <X size={24} /> : <Menu size={24} />}
                 </button>
             </div>
 
             {/* Mobile dropdown */}
             {isOpen && (
-                <div className="absolute top-16 left-0 w-full bg-gray-900 flex flex-col items-start px-6 py-4 space-y-2 md:hidden">
-                    <a onClick={toggleMenu} href="#home" className="text-white hover:text-blue-400 transition">Home</a>
-                    <a onClick={toggleMenu} href="#about" className="text-white hover:text-blue-400 transition">About</a>
-                    <a onClick={toggleMenu} href="#skills" className="text-white hover:text-blue-400 transition">Skills</a>
-                    <a onClick={toggleMenu} href="#projects" className="text-white hover:text-blue-400 transition">Projects</a>
-                    <a onClick={toggleMenu} href="#contact" className="text-white hover:text-blue-400 transition">Contact</a>
-                </div>
+                <motion.div
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="absolute top-20 left-0 w-full glass rounded-3xl flex flex-col items-center py-8 space-y-6 md:hidden shadow-2xl"
+                >
+                    {navLinks.map((link) => (
+                        <a
+                            key={link.name}
+                            onClick={toggleMenu}
+                            href={link.href}
+                            className="text-lg font-semibold text-gray-300 hover:text-white transition"
+                        >
+                            {link.name}
+                        </a>
+                    ))}
+                </motion.div>
             )}
-        </motion.div>
+        </motion.nav>
     );
 };
 

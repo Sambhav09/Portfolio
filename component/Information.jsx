@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from 'react'
-import { Mail, Phone, } from 'lucide-react'
+import { Mail, Phone, Send, MapPin } from 'lucide-react'
 import { motion } from 'framer-motion'
 
 const Information = () => {
@@ -14,21 +14,12 @@ const Information = () => {
         e.preventDefault()
         try {
             setloading(true)
-            const data = {
-                name: name,
-                email: email,
-                subject: subject,
-                message: message
-            }
+            const data = { name, email, subject, message }
             const response = await fetch('/api/mail', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data),
             });
-            console.log(data)
-
         } catch (error) {
             console.log(error)
         } finally {
@@ -38,97 +29,121 @@ const Information = () => {
             setsubject("")
             setmessage("")
         }
-
     }
 
-
     return (
-        <div className='min-h-screen sm:h-screen w-full bg-black text-white px-4 py-8 overflow-x-hidden overflow-y-hidden'>
-            <motion.h1
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 1, delay: 0.5 }}
-                className='text-center text-4xl'>Contact</motion.h1>
-            <div className='w-full h-full pt-20 sm:pt-0 flex flex-col md:flex-row gap-8'>
+        <section id="contact" className="py-24 relative">
+            <div className="max-w-6xl mx-auto px-6">
                 <motion.div
-                    initial={{ opacity: 0, y: -200 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 2.5, delay: 1 }}
-                    className='w-full h-full md:w-1/2 flex flex-col items-center justify-center gap-6'
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="text-center mb-16"
                 >
-                    <div className='p-6 flex flex-col w-80 sm:flex-row justify-start items-center gap-6 rounded-lg border-2 shadow-lg'>
-                        <Mail size={30} />
-                        <div className='text-center sm:text-left'>
-                            <p className='font-semibold'>Mail</p>
-                            <p>Jsambhav2004@gmail.com</p>
-                        </div>
-                    </div>
-
-                    <div className='p-6 flex flex-col w-80 sm:flex-row justify-start items-center gap-6 rounded-lg border-2 shadow-lg'>
-                        <Phone size={32} />
-                        <div className='text-center sm:text-left'>
-                            <p className='font-semibold'>Mobile no.</p>
-                            <p>+91 7599097078</p>
-                        </div>
-                    </div>
+                    <h2 className="text-4xl md:text-5xl font-black tracking-tight text-white mb-4 uppercase">
+                        Get In <span className="text-blue-500">Touch</span>
+                    </h2>
+                    <div className="w-20 h-1 bg-blue-500 mx-auto rounded-full"></div>
                 </motion.div>
 
-                <motion.div
-                    initial={{ opacity: 0, x: 150 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 2.5, delay: 1 }}
-                    className='w-full md:w-1/2 flex justify-center items-center'>
-                    <form autoComplete='off' action="submit" onSubmit={handleSubmit} className='w-full max-w-md'>
-                        <div className='flex flex-col gap-4'>
-                            <div className='gap-4 flex flex-col md:flex-row'>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    {/* Contact Info */}
+                    <motion.div
+                        initial={{ opacity: 0, x: -30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        className="space-y-8"
+                    >
+                        <h3 className="text-2xl font-bold text-white mb-6">Let's talk about your project</h3>
+                        <p className="text-gray-400 leading-relaxed mb-10">
+                            I'm always open to discussing new projects, creative ideas or opportunities to be part of your visions.
+                        </p>
+
+                        <div className="space-y-6">
+                            {[
+                                { icon: Mail, label: "Email", value: "Jsambhav2004@gmail.com", color: "blue" },
+                                { icon: Phone, label: "Phone", value: "+91 7599097078", color: "purple" },
+                                { icon: MapPin, label: "Location", value: "India", color: "green" }
+                            ].map((item, i) => (
+                                <div key={i} className="flex items-center gap-6 group">
+                                    <div className={`p-4 rounded-2xl glass border border-white/5 group-hover:border-blue-500/30 transition-all`}>
+                                        <item.icon size={24} className="text-blue-500" />
+                                    </div>
+                                    <div>
+                                        <p className="text-sm font-bold text-gray-500 uppercase tracking-widest">{item.label}</p>
+                                        <p className="text-lg font-medium text-white">{item.value}</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </motion.div>
+
+                    {/* Contact Form */}
+                    <motion.div
+                        initial={{ opacity: 0, x: 30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        className="glass p-8 rounded-3xl border border-white/5 shadow-2xl"
+                    >
+                        <form onSubmit={handleSubmit} className="space-y-6">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div className="space-y-2">
+                                    <label className="text-xs font-bold text-gray-500 uppercase tracking-wider ml-1">Name</label>
+                                    <input
+                                        type="text"
+                                        required
+                                        value={name}
+                                        onChange={(e) => setname(e.target.value)}
+                                        className="w-full px-6 py-4 bg-white/5 border border-white/10 rounded-2xl text-white outline-none focus:border-blue-500/50 transition-all"
+                                        placeholder="Your Name"
+                                    />
+                                </div>
+                                <div className="space-y-2">
+                                    <label className="text-xs font-bold text-gray-500 uppercase tracking-wider ml-1">Email</label>
+                                    <input
+                                        type="email"
+                                        required
+                                        value={email}
+                                        onChange={(e) => setemail(e.target.value)}
+                                        className="w-full px-6 py-4 bg-white/5 border border-white/10 rounded-2xl text-white outline-none focus:border-blue-500/50 transition-all"
+                                        placeholder="Your Email"
+                                    />
+                                </div>
+                            </div>
+                            <div className="space-y-2">
+                                <label className="text-xs font-bold text-gray-500 uppercase tracking-wider ml-1">Subject</label>
                                 <input
-                                    autoComplete='off'
                                     type="text"
-                                    placeholder='Name'
                                     required
-                                    onChange={(e) => setname(e.target.value)}
-                                    value={name}
-                                    className='p-2 rounded-lg text-white border-2 border-gray-500 bg-transparent w-full'
-                                />
-                                <input
-                                    autoComplete='off'
-                                    type="email"
-                                    required
-                                    onChange={(e) => setemail(e.target.value)}
-                                    value={email}
-                                    placeholder='Email'
-                                    className='p-2 rounded-lg text-white border-2 border-gray-500 bg-transparent w-full'
+                                    value={subject}
+                                    onChange={(e) => setsubject(e.target.value)}
+                                    className="w-full px-6 py-4 bg-white/5 border border-white/10 rounded-2xl text-white outline-none focus:border-blue-500/50 transition-all"
+                                    placeholder="Subject"
                                 />
                             </div>
-                            <input
-                                autoComplete='off'
-                                type="text"
-                                required
-                                onChange={(e) => setsubject(e.target.value)}
-                                value={subject}
-                                placeholder='Subject'
-                                className='p-3 rounded-lg border-2 text-white border-gray-500 bg-transparent'
-                            />
-                            <textarea
-                                autoComplete='off'
-                                placeholder='Message'
-                                required
-                                onChange={(e) => setmessage(e.target.value)}
-                                value={message}
-                                className='p-3 rounded-lg border-2 text-white border-gray-500 bg-transparent'
-                                rows="5"
-                            ></textarea>
+                            <div className="space-y-2">
+                                <label className="text-xs font-bold text-gray-500 uppercase tracking-wider ml-1">Message</label>
+                                <textarea
+                                    required
+                                    value={message}
+                                    onChange={(e) => setmessage(e.target.value)}
+                                    rows="4"
+                                    className="w-full px-6 py-4 bg-white/5 border border-white/10 rounded-2xl text-white outline-none focus:border-blue-500/50 transition-all resize-none"
+                                    placeholder="How can I help you?"
+                                ></textarea>
+                            </div>
                             <button
                                 type="submit"
-                                className='p-3 rounded-full bg-blue-400 text-white hover:bg-blue-500 transition'
+                                disabled={loading}
+                                className="w-full py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl font-bold flex items-center justify-center gap-2 transition-all shadow-lg shadow-blue-600/20 disabled:opacity-50"
                             >
-                                {loading ? "Sending..." : "Send"}
+                                {loading ? "Sending..." : <>Send Message <Send size={18} /></>}
                             </button>
-                        </div>
-                    </form>
-                </motion.div>
+                        </form>
+                    </motion.div>
+                </div>
             </div>
-        </div>
+        </section>
     )
 }
 
