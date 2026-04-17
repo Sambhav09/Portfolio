@@ -84,7 +84,7 @@ const Projects = () => {
             description: "A secure repository for AI prompts. Create, update, and manage your collection with NextAuth integration for personalized user experience.",
             image: "/prompt2.png", // Placeholder
              github: "https://github.com/Sambhav09/Prompt",
-            demo: "https://prompt-sand.vercel.app/"
+            demo: null
         },
         {
             title: "koenisegg gemera",
