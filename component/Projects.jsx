@@ -99,7 +99,7 @@ const Projects = () => {
             title: "SpeakWise AI",
             description:
                 "An AI-powered language learning mobile application built with React Native and Expo. Features real-time AI voice conversations using Stream Voice SDK, secure authentication with Clerk, global state management using Zustand, and a responsive NativeWind interface for an engaging speaking practice experience across Android and iOS.",
-            image: "/speakwise.png",
+            image: "/ChatCode.png",
             github: "https://github.com/Sambhav09/SpeakWise-AI", // Replace with your actual repository
             demo: null,
         },
