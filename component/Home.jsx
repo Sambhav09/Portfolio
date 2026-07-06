@@ -1,10 +1,13 @@
 "use client"
 import React from 'react'
 import { motion } from 'framer-motion'
-import { ArrowRight, Github, Twitter, Linkedin } from 'lucide-react'
+import { ArrowRight, Github, Linkedin, FileText } from 'lucide-react'
 
 const Home = () => {
     const name = "Sambhav Jain"
+
+    const resumeLink =
+        "https://drive.google.com/file/d/1xF6jAGgMhbzTJfwlyyKcLPynP2X6SIX3/view?usp=sharing"
 
     const containerVariants = {
         hidden: { opacity: 0 },
@@ -51,7 +54,7 @@ const Home = () => {
 
                 <motion.div variants={itemVariants}>
                     <h2 className='text-3xl md:text-4xl text-gray-400 font-medium'>Hello, I'm</h2>
-                    <h1 className='text-6xl md:text-8xl font-black text-white tracking-tighter mt-2'>
+                    <h1 className='text-5xl sm:text-6xl md:text-8xl font-black text-white tracking-tighter mt-2'>
                         {name.split("").map((letter, index) => (
                             <motion.span
                                 key={index}
@@ -85,9 +88,24 @@ const Home = () => {
                     className='flex flex-wrap gap-6 mt-4'
                 >
                     <a href="#projects" className="group relative">
+
                         <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full blur opacity-60 group-hover:opacity-100 transition duration-300"></div>
                         <button className='relative flex items-center gap-2 px-8 py-4 bg-black rounded-full text-white font-bold transition duration-300 group-hover:bg-black/80'>
                             View Projects <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                        </button>
+                    </a>
+
+                    <a
+                        href={resumeLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group relative"
+                    >
+                        <div className="absolute -inset-0.5 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-full blur opacity-60 group-hover:opacity-100 transition duration-300"></div>
+
+                        <button className="relative flex items-center gap-2 px-8 py-4 bg-black rounded-full text-white font-bold transition duration-300 group-hover:bg-black/80">
+                            <FileText size={18} />
+                            Resume
                         </button>
                     </a>
 
