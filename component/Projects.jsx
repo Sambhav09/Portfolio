@@ -85,7 +85,7 @@ const Projects = () => {
                 "A real-time collaborative chat and code editor platform built with the MERN stack and Socket.io, enabling room-based messaging and live code collaboration.",
             image: "/ChatCode.png",
             github: "https://github.com/Sambhav09/ChatCode", // Update if different
-            demo: null,
+            demo: https://chat-code-q5j5.vercel.app,
         },
         {
             title: "AI Interviewer",
